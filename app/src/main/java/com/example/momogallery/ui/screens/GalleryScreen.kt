@@ -25,6 +25,7 @@ import coil.compose.rememberAsyncImagePainter
 import com.example.momogallery.data.model.Media
 import com.example.momogallery.ui.MediaViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GalleryScreen(
     viewModel: MediaViewModel,
