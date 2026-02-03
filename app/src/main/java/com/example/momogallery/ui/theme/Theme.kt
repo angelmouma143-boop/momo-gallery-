@@ -46,7 +46,7 @@ private val LightColorScheme = lightColorScheme(
 fun MomoGalleryTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = false, // Disable dynamic color to enforce our branding
+    dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
@@ -55,14 +55,14 @@ fun MomoGalleryTheme(
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
         darkTheme -> DarkColorScheme
-        else -> LightColorScheme // Or force dark mode? Let's respect system for now but default to dark in mind
+        else -> LightColorScheme
     }
     
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = colorScheme.background.toArgb()
+            window.statusBarColor = Color.Transparent.toArgb() // Transparent for edge-to-edge
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
         }
     }
@@ -70,6 +70,7 @@ fun MomoGalleryTheme(
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,
+        shapes = Shapes,
         content = content
     )
 }

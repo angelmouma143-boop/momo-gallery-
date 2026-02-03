@@ -23,7 +23,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MomoGalleryTheme {
-                MomoGalleryApp()
+                // Main entry point is now MomoApp which handles its own permissions and navigation
+                com.example.momogallery.ui.MomoApp()
             }
         }
     }
